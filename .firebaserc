@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "universalcolorpicker": {
+      "hosting": {
+        "app": [
+          "universalcolorpicker"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "universalcolorpicker"
+  }
+}
