@@ -27,6 +27,7 @@
     "@capacitor/filesystem": "^4.1.4",
     "@capacitor/preferences": "^4.0.2",
     "@ionic/angular": "^6.1.9",
+    "@ionic/cli": "^6.20.4",
     "@ionic/pwa-elements": "^3.1.1",
     "cordova-plugin-camera-preview": "^0.12.3",
     "ionicons": "^6.0.3",
