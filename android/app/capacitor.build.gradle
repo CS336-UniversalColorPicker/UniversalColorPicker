@@ -12,7 +12,8 @@ dependencies {
     implementation project(':capacitor-camera')
     implementation project(':capacitor-filesystem')
     implementation project(':capacitor-preferences')
-    implementation "androidx.exifinterface:exifinterface:1.2.0"
+    implementation project(':capgo-camera-preview')
+
 }
 
 
