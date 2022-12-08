@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Save Color</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="tryAgain()">Try Again</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-input type="text" placeholder="Name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input type="text" placeholder="Description"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <ion-item class="bababooey">
+    <ion-img src="{{imageSource}}" alt="The image from which the color was picked"></ion-img>
+    <ion-avatar [style.background-color]="color.value" slot="end"></ion-avatar>
+  </ion-item>
+</ion-content>
+
+<ion-footer>
+  <ion-button expand="block" (click)="save()">Save</ion-button>
+</ion-footer>
