@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      Universal Color Picker
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,9 +9,34 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+      <ion-title size="large">Universal Color Picker</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <ion-list lines="none">
+    <ion-item-sliding class="color-item" *ngFor="let color of colors">
+      <ion-item>
+        <ion-label class="color-label">
+          <h1>{{color.name}}</h1>
+          <p>{{color.description}}</p>
+        </ion-label>
+
+        <ion-label class="color-value-text" item-end>
+          <p>{{color.value}}</p>
+        </ion-label>
+
+        <ion-avatar [style.background-color]="color.value" item-end></ion-avatar>
+
+        <ion-item-options side="end">
+          <!-- <ion-item-option color="danger" (click)="removeClient(client)">
+              <ion-icon slot="icon-only" name="trash"></ion-icon>
+            </ion-item-option> -->
+        </ion-item-options>
+      </ion-item>
+      <hr class="solid">
+
+    </ion-item-sliding>
+  </ion-list>
 
   <ion-fab vertical="bottom" horizontal="center" slot="fixed">
     <ion-fab-button (click)="takePhoto()">
@@ -19,9 +44,9 @@
     </ion-fab-button>
   </ion-fab>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer"
-        href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <div id="welcome-container" *ngIf="colors.length === 0">
+    <strong>Press the button below to pick a color!</strong>
+    <!-- <p>Start with Ionic <a target="_blank" rel="noopener noreferrer"
+        href="https://ionicframework.com/docs/components">UI Components</a></p> -->
   </div>
 </ion-content>

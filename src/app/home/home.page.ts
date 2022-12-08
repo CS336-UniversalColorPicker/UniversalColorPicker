@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { CameraPreview, CameraPreviewOptions } from '@capgo/camera-preview';
+import { CameraPreview, CameraPreviewOptions } from '@capacitor-community/camera-preview';
+import { Color } from '../interfaces/color';
+import { ColorsService } from '../services/colors.service';
+// import { CameraPreview, CameraPreviewOptions } from '@capgo/camera-preview';
 import { PhotoService } from '../services/photo.service';
 
 @Component({
@@ -9,20 +12,21 @@ import { PhotoService } from '../services/photo.service';
 })
 export class HomePage {
 
-  constructor(public photoService: PhotoService) { }
+  public colors: Color[] = [];
+
+  constructor(
+    public photoService: PhotoService,
+    public colorService: ColorsService) {
+    colorService.getColors().subscribe(colors => {
+      this.colors = colors;
+    });
+  }
 
   addPhotoToGallery() {
     this.photoService.addNewToGallery();
   }
 
   takePhoto() {
-    const cameraPreviewOptions: CameraPreviewOptions = {
-      position: 'rear',
-      height: 1920,
-      width: 1080
-    };
-
-    CameraPreview.start(cameraPreviewOptions);
   }
 
 }
