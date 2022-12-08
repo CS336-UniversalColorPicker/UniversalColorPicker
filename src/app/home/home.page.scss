@@ -1,4 +1,4 @@
-#container {
+#welcome-container {
   text-align: center;
 
   position: absolute;
@@ -8,14 +8,12 @@
   transform: translateY(-50%);
 }
 
-
-
-#container strong {
+#welcome-container strong {
   font-size: 20px;
   line-height: 26px;
 }
 
-#container p {
+#welcome-container p {
   font-size: 16px;
   line-height: 22px;
 
@@ -24,6 +22,31 @@
   margin: 0;
 }
 
-#container a {
+#welcome-container a {
   text-decoration: none;
+}
+
+hr.solid {
+  border-top: 1px solid #8c8c8c;
+}
+
+.color-item {
+
+  * {
+    // border: red 1px solid;
+  }
+
+  .color-labels-wrapper {
+    display: flex;
+  }
+
+  .color-label {
+    flex-shrink: 0;
+  }
+
+  .color-value-text {
+    text-align: end;
+    margin-right: 10px;
+    max-width: 64px;
+  }
 }
