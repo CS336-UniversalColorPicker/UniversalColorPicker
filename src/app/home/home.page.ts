@@ -23,12 +23,8 @@ export class HomePage {
     });
   }
 
-  addPhotoToGallery() {
-    this.photoService.addNewToGallery();
-  }
-
   takePhoto() {
-    this.navCtrl.navigateForward(['save-color', { color: '#00ff00' }]);
+    this.navCtrl.navigateForward('camera-page');
   }
 
   removeColor(color: Color) {
