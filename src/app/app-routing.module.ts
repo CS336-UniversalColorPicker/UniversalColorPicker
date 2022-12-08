@@ -11,6 +11,10 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'save-color',
+    loadChildren: () => import('./pages/save-color/save-color.module').then( m => m.SaveColorPageModule)
+  },
 ];
 
 @NgModule({
