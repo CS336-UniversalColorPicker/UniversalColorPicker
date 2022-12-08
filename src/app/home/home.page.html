@@ -13,7 +13,7 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-list lines="none">
+  <ion-list lines="full">
     <ion-item-sliding class="color-item" *ngFor="let color of colors">
       <ion-item>
         <ion-label class="color-label">
@@ -26,15 +26,13 @@
         </ion-label>
 
         <ion-avatar [style.background-color]="color.value" item-end></ion-avatar>
-
-        <ion-item-options side="end">
-          <!-- <ion-item-option color="danger" (click)="removeClient(client)">
-              <ion-icon slot="icon-only" name="trash"></ion-icon>
-            </ion-item-option> -->
-        </ion-item-options>
       </ion-item>
-      <hr class="solid">
 
+      <ion-item-options side="end">
+        <ion-item-option color="danger" (click)="removeColor(color)">
+          <ion-icon slot="icon-only" name="trash"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
     </ion-item-sliding>
   </ion-list>
 
@@ -46,7 +44,5 @@
 
   <div id="welcome-container" *ngIf="colors.length === 0">
     <strong>Press the button below to pick a color!</strong>
-    <!-- <p>Start with Ionic <a target="_blank" rel="noopener noreferrer"
-        href="https://ionicframework.com/docs/components">UI Components</a></p> -->
   </div>
 </ion-content>

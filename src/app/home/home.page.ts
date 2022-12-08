@@ -31,4 +31,7 @@ export class HomePage {
     this.navCtrl.navigateForward(['save-color', { color: '#00ff00' }]);
   }
 
+  removeColor(color: Color) {
+    this.colorService.removeColor(color.id);
+  }
 }
