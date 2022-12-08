@@ -9,7 +9,6 @@ import { Color } from '../interfaces/color';
 })
 export class ColorsService {
   public colors$ = new Observable<Color[]>();
-  private colors: Color[] = [];
 
   constructor(private firestore: Firestore) {
     this.load();
@@ -18,9 +17,6 @@ export class ColorsService {
   async load(): Promise<void> {
     const colorCollection = collection(this.firestore, 'colors');
     this.colors$ = collectionData(colorCollection) as Observable<Color[]>;
-    this.colors$.subscribe(colors => {
-      this.colors = colors;
-    });
   }
 
   getColors(): Observable<Color[]> {

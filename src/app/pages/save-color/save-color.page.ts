@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { NavController } from '@ionic/angular';
+import { Color } from 'src/app/interfaces/color';
+import { ColorsService } from 'src/app/services/colors.service';
 
 @Component({
   selector: 'app-save-color',
@@ -7,23 +11,43 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SaveColorPage implements OnInit {
 
-  public color = {
-    value: "#0000ff",
-  }
+  public nameWasEmpty: boolean = false;
+
+  public colorValue: string = '';
+  public colorName: string = '';
+  public colorDescription: string = '';
 
   public imageSource: string = "https://docs-demo.ionic.io/assets/madison.jpg";
 
-  constructor() { }
+  constructor(
+    public colorService: ColorsService,
+    private navCtrl: NavController,
+    private route: ActivatedRoute) {
+    const colorValue = this.route.snapshot.paramMap.get('color');
+    if (colorValue !== null) {
+      this.colorValue = colorValue;
+    }
+  }
 
   ngOnInit() {
   }
 
-  save() {
+  onNameChange() {
+    this.nameWasEmpty = false;
+  }
 
+  save() {
+    this.nameWasEmpty = !this.colorName;
+    if (this.nameWasEmpty) {
+      return;
+    }
+
+    this.colorService.addColor(this.colorValue, this.colorName, this.colorDescription);
+    this.navCtrl.navigateBack('');
   }
 
   tryAgain() {
-    
+    this.navCtrl.navigateBack('');
   }
 
 }

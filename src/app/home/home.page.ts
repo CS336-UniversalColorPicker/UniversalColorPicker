@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { Color } from '../interfaces/color';
 import { ColorsService } from '../services/colors.service';
-// import { CameraPreview, CameraPreviewOptions } from '@capgo/camera-preview';
 import { PhotoService } from '../services/photo.service';
 
 @Component({
@@ -18,8 +17,7 @@ export class HomePage {
   constructor(
     public photoService: PhotoService,
     public colorService: ColorsService,
-    private navCtrl: NavController,
-    private route: ActivatedRoute) {
+    private navCtrl: NavController) {
     colorService.getColors().subscribe(colors => {
       this.colors = colors;
     });
@@ -30,7 +28,7 @@ export class HomePage {
   }
 
   takePhoto() {
-    this.navCtrl.navigateForward('save-color');
+    this.navCtrl.navigateForward(['save-color', { color: '#00ff00' }]);
   }
 
 }
