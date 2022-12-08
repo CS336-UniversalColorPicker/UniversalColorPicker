@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      Universal Color Picker
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -13,15 +13,18 @@
     </ion-toolbar>
   </ion-header>
 
+  <div id="container">
+
+    <img (click)="getColor($event)" *ngIf="photoService.lastPhoto" id="image"
+      [src]="sanitizeImageUrl(photoService.lastPhoto.webviewPath)">
+
+    <div id="color-preview" [style.background-color]="'rgba('+ r + ',' + g + ',' + b + ',' + a + ')'"></div>
+  </div>
+
   <ion-fab vertical="bottom" horizontal="center" slot="fixed">
-    <ion-fab-button (click)="takePhoto()">
+    <ion-fab-button (click)="addPhotoToGallery()">
       <ion-icon name="camera"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer"
-        href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
 </ion-content>
