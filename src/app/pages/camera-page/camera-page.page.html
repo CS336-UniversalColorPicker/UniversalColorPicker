@@ -1,0 +1,33 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Universal Color Picker
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Blank</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="container">
+    <div id="photo-manager" *ngIf="photoService.lastPhoto">
+      <img (click)="getColor($event)" id="image" [src]="sanitizeImageUrl(photoService.lastPhoto.webviewPath)">
+      <div id="color-preview" [style.background-color]="'rgba('+ r + ',' + g + ',' + b + ',' + a + ')'"></div>
+      <ion-icon name="copy-outline" (click)="copyHex()"></ion-icon>
+      <p>Hex: {{hex}}</p>
+      <ion-icon name="copy-outline" (click)="copyRGB()"></ion-icon>
+      <p>RGB: {{rgb}}</p>
+    </div>
+  </div>
+
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+    <ion-fab-button (click)="addPhoto()">
+      <ion-icon name="camera"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

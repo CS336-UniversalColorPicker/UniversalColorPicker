@@ -10,7 +10,11 @@ const routes: Routes = [
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
+  },  {
+    path: 'camera-page',
+    loadChildren: () => import('./pages/camera-page/camera-page.module').then( m => m.CameraPagePageModule)
   },
+
 ];
 
 @NgModule({
