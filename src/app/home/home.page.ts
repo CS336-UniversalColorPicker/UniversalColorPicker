@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { CameraPreview, CameraPreviewOptions } from '@capgo/camera-preview';
+import { ActivatedRoute } from '@angular/router';
+import { NavController } from '@ionic/angular';
 import { PhotoService } from '../services/photo.service';
 
 @Component({
@@ -9,20 +10,13 @@ import { PhotoService } from '../services/photo.service';
 })
 export class HomePage {
 
-  constructor(public photoService: PhotoService) { }
-
-  addPhotoToGallery() {
-    this.photoService.addNewToGallery();
-  }
+  constructor(
+    private photoService: PhotoService,
+    private navCtrl: NavController,
+    private route: ActivatedRoute,) { }
 
   takePhoto() {
-    const cameraPreviewOptions: CameraPreviewOptions = {
-      position: 'rear',
-      height: 1920,
-      width: 1080
-    };
-
-    CameraPreview.start(cameraPreviewOptions);
+    this.navCtrl.navigateForward('save-color');
   }
 
 }
