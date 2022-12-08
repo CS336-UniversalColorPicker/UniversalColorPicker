@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { PhotoService } from 'src/app/services/photo.service';
 import { Clipboard } from '@angular/cdk/clipboard';
-import { ToastController } from '@ionic/angular';
+import { NavController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-camera-page',
@@ -30,10 +30,11 @@ export class CameraPagePage implements OnInit {
     private sanitizer: DomSanitizer,
     private clipboard: Clipboard,
     private toastController: ToastController,
+    private navCtrl: NavController,
   ) { }
 
   ngOnInit(): void {
-
+    this.addPhoto();
   }
 
   // see https://stackoverflow.com/questions/57743966/getting-unsafe-url-error-while-displaying-image
@@ -67,7 +68,7 @@ export class CameraPagePage implements OnInit {
     this.b = this.pixelData![2];
     this.a = this.pixelData![3];
 
-    this.hex = `#${this.r.toString(16)}${this.g.toString(16)}${this.b.toString(16)}`.toUpperCase();
+    this.hex = `#${this.toHex(this.r)}${this.toHex(this.g)}${this.toHex(this.b)}`.toUpperCase();
     this.rgb = `(${this.r}, ${this.g}, ${this.b})`;
   }
 
@@ -91,5 +92,15 @@ export class CameraPagePage implements OnInit {
       position: 'bottom',
     });
     await toast.present();
+  }
+
+  toHex(val: number) {
+    let hex = val.toString(16);
+    return hex.length === 1 ? "0" + hex : hex;
+  }
+
+  // navigate to save-color page, pass current color
+  saveColor() {
+    this.navCtrl.navigateForward(['save-color', { color: this.hex }]);
   }
 }
