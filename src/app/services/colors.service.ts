@@ -15,6 +15,8 @@ export class ColorsService {
   }
 
   async load(): Promise<void> {
+
+    
     const colorCollection = collection(this.firestore, 'colors');
     this.colors$ = collectionData(colorCollection) as Observable<Color[]>;
   }
@@ -24,7 +26,7 @@ export class ColorsService {
   }
 
   async removeColor(colorId: string): Promise<void> {
-    await deleteDoc(doc(this.firestore, 'colors', colorId));
+    await deleteDoc(doc(this.firestore, 'colors', 'ShcdcGeV1BakmFLSaeWtfKKOy583', colorId));
   }
 
   async addColor(value: string, name?: string, description?: string): Promise<string> {
@@ -32,6 +34,7 @@ export class ColorsService {
 
     await setDoc(docRef, {
       id: docRef.id,
+      userId: 'ShcdcGeV1BakmFLSaeWtfKKOy583',
       value,
       name,
       description,
