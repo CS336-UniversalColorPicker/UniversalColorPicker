@@ -17,6 +17,8 @@ export class HomePage {
 
   public colors: Color[] = [];
 
+  private userIsSignedOut: boolean = true;
+
   constructor(
     private photoService: PhotoService,
     private colorService: ColorsService,
@@ -26,37 +28,32 @@ export class HomePage {
     private clipboard: Clipboard,
     private toastController: ToastController,
     private auth: Auth) {
-      // this.colorService.getColors().subscribe(colors => {
-      //   this.colors = colors;
-      // });
-    onAuthStateChanged(auth, async (user: User | null) => {
-      this.colors = [];
-      console.log(`auth state changed: ${user?.uid ?? 'no uid'}`);
-      if (user) {
-        await this.colorService.load(user?.uid ?? null);
-        this.colorService.getColors().subscribe(colors => {
-          this.colors = colors;
-        });
+  }
+
+  async ionViewDidEnter() {
+    const currentUser = this.authService.getCurrentUser();
+    await this.colorService.load(currentUser);
+    this.colorService.getColors().subscribe(colors => {
+      if (this.userIsSignedOut) {
+        this.colors = [];
+      } else {
+        this.colors = colors;
       }
     });
   }
 
-  // ionViewDidEnter() {
-  //   const currentUser = this.authService.getCurrentUser();
-  //   console.log("ionViewWillEnter: " + currentUser);
-  //   // this.refreshColors();
-  // }
-
   async signInButtonClicked() {
     let userIsSignedIn: boolean = !!this.authService.getCurrentUser();
+    this.userIsSignedOut = userIsSignedIn;
     if (userIsSignedIn) {
+      // sign out
+
       let loadingElement = await this.loadingController.create();
       await loadingElement.present();
       await this.authService.signUserOut();
       await loadingElement.dismiss();
-
-      this.colors = [];
     } else {
+      // sign in
       await this.navCtrl.navigateForward('/login');
     }
   }
@@ -68,8 +65,7 @@ export class HomePage {
   }
 
   takePhoto() {
-    // this.navCtrl.navigateForward('camera-page');
-    console.log(`colors in home page: ${this.colors}`);
+    this.navCtrl.navigateForward('camera-page');
   }
 
   removeColor(color: Color) {

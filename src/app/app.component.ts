@@ -8,11 +8,7 @@ import { ColorsService } from './services/colors.service';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor(
-    private auth: Auth,
-    private colorService: ColorsService) {
-    onAuthStateChanged(auth, (user: User | null) => {
-      colorService.load(user?.uid ?? null);
-    });
+  constructor() {
+
   }
 }
