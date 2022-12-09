@@ -10,15 +10,11 @@ import { AuthService } from './auth.service';
 })
 export class ColorsService {
   private colors$ = new Observable<Color[]>();
-  private colors: Color[] = [];
 
-  constructor(
-    private firestore: Firestore,
-    private authService: AuthService) {
+  constructor(private firestore: Firestore) {
   }
 
   async load(userId: string | null) {
-    console.log(`user id: ${userId}`);
     if (userId !== null) {
       const colorCollection = collection(this.firestore, 'colors');
       const queriedData = query(colorCollection, where("userId", "==", userId));
@@ -26,12 +22,6 @@ export class ColorsService {
     } else {
       this.colors$ = new Observable<Color[]>();
     }
-  
-    // this.colors = [];
-    // this.colors$.subscribe(colors => {
-    //   console.log(`here are the colors ${colors}`);
-    //   this.colors = colors;
-    // });
   }
 
   getColors(): Observable<Color[]> {
@@ -42,12 +32,12 @@ export class ColorsService {
     await deleteDoc(doc(this.firestore, 'colors', colorId));
   }
 
-  async addColor(value: string, name?: string, description?: string): Promise<string> {
+  async addColor(userId: string, value: string, name?: string, description?: string): Promise<string> {
     const docRef = doc(collection(this.firestore, 'colors'));
 
     await setDoc(docRef, {
       id: docRef.id,
-      uid: 'ShcdcGeV1BakmFLSaeWtfKKOy583',
+      userId,
       value,
       name,
       description,
