@@ -3,6 +3,7 @@ import { FirebaseApp } from '@angular/fire/app';
 import { UserCredential } from '@angular/fire/auth';
 import { AlertController, LoadingController, NavController, ToastController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
+import { ColorsService } from 'src/app/services/colors.service';
 
 @Component({
   selector: 'app-login',
@@ -26,7 +27,8 @@ export class LoginPage implements OnInit {
     private loadingController: LoadingController,
     private alertController: AlertController,
     private toastController: ToastController,
-    private navController: NavController) { }
+    private navController: NavController,
+    private colorService: ColorsService) { }
 
   ngOnInit() {
   }
@@ -140,7 +142,7 @@ export class LoginPage implements OnInit {
       position: 'bottom',
     });
     await toast.present();
-
+    
     // go home
     this.navController.navigateBack('');
   }

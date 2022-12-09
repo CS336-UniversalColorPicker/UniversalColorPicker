@@ -6,6 +6,7 @@ import { AuthService } from '../services/auth.service';
 import { ColorsService } from '../services/colors.service';
 import { PhotoService } from '../services/photo.service';
 import { Clipboard } from '@angular/cdk/clipboard';
+import { Auth, onAuthStateChanged, User } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-home',
@@ -23,11 +24,28 @@ export class HomePage {
     private navCtrl: NavController,
     private loadingController: LoadingController,
     private clipboard: Clipboard,
-    private toastController: ToastController) {
-    colorService.getColors().subscribe(colors => {
-      this.colors = colors;
+    private toastController: ToastController,
+    private auth: Auth) {
+      // this.colorService.getColors().subscribe(colors => {
+      //   this.colors = colors;
+      // });
+    onAuthStateChanged(auth, async (user: User | null) => {
+      this.colors = [];
+      console.log(`auth state changed: ${user?.uid ?? 'no uid'}`);
+      if (user) {
+        await this.colorService.load(user?.uid ?? null);
+        this.colorService.getColors().subscribe(colors => {
+          this.colors = colors;
+        });
+      }
     });
   }
+
+  // ionViewDidEnter() {
+  //   const currentUser = this.authService.getCurrentUser();
+  //   console.log("ionViewWillEnter: " + currentUser);
+  //   // this.refreshColors();
+  // }
 
   async signInButtonClicked() {
     let userIsSignedIn: boolean = !!this.authService.getCurrentUser();
@@ -36,18 +54,22 @@ export class HomePage {
       await loadingElement.present();
       await this.authService.signUserOut();
       await loadingElement.dismiss();
+
+      this.colors = [];
     } else {
-      this.navCtrl.navigateForward('/login');
+      await this.navCtrl.navigateForward('/login');
     }
   }
 
   getSignInButtonText(): string {
-    let userIsSignedIn: boolean = !!this.authService.getCurrentUser();
+    const currentUser = this.authService.getCurrentUser();
+    let userIsSignedIn: boolean = !!currentUser;
     return userIsSignedIn ? 'Sign Out' : 'Sign In';
   }
 
   takePhoto() {
-    this.navCtrl.navigateForward('camera-page');
+    // this.navCtrl.navigateForward('camera-page');
+    console.log(`colors in home page: ${this.colors}`);
   }
 
   removeColor(color: Color) {
