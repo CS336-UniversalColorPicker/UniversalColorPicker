@@ -1,9 +1,9 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Save Color</ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="tryAgain()">Try Again</ion-button>
-    </ion-buttons>
+    <!-- <ion-buttons slot="end">
+      <ion-button (click)="cancel()">Cancel</ion-button>
+    </ion-buttons> -->
   </ion-toolbar>
 </ion-header>
 
@@ -15,14 +15,14 @@
     </ion-item>
 
     <ion-item>
-      <ion-input type="text" [(ngModel)]="colorDescription" placeholder="Description"></ion-input>
+      <ion-input type="text" [(ngModel)]="colorDescription" placeholder="Description (optional)"></ion-input>
     </ion-item>
   </ion-list>
 
   <ion-item *ngIf="colorValue !== ''">
-    <ion-img id="image-thumbnail" src="{{imageSource}}" alt="The image from which the color was picked"></ion-img>
+    <!-- <ion-img id="image-thumbnail" src="{{imageSource}}" alt="The image from which the color was picked"></ion-img> -->
 
-    <ion-list id="color-info" slot="end">
+    <ion-list id="color-info" slot="start">
       <ion-avatar id="color-preview" [style.background-color]="colorValue"></ion-avatar>
 
       <ion-label>
@@ -30,8 +30,21 @@
       </ion-label>
     </ion-list>
   </ion-item>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6">
+        <ion-button fill="outline" (click)="cancel()">Cancel</ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button fill="outline" (click)="save()">Save</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
 </ion-content>
 
-<ion-footer>
+<!-- <ion-footer>
   <ion-button expand="block" (click)="save()">Save</ion-button>
-</ion-footer>
+</ion-footer> -->

@@ -46,7 +46,7 @@ export class SaveColorPage implements OnInit {
     this.navCtrl.navigateBack('');
   }
 
-  tryAgain() {
+  cancel() {
     this.navCtrl.navigateBack('');
   }
 
