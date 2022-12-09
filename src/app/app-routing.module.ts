@@ -23,7 +23,11 @@ const routes: Routes = [
   {
     path: 'save-color',
     loadChildren: () => import('./pages/save-color/save-color.module').then(m => m.SaveColorPageModule)
+  },  {
+    path: 'login',
+    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
   },
+
 ];
 
 @NgModule({
