@@ -21,7 +21,7 @@ export class CameraPagePage implements OnInit {
   public a: number = 0;
 
   public hex: string = '#000000';
-  public rgb: string = "rgb(0, 0, 0)";
+  public rgb: string = "(0, 0, 0)";
 
   private redrawCanvas: boolean = false;
 

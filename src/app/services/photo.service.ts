@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { NavController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,9 @@ export class PhotoService {
   public lastPhoto?: UserPhoto;
   // public photos: UserPhoto[] = [];
 
-  constructor() { }
+  constructor(
+    private navCtrl: NavController,
+  ) { }
 
   public async takePhoto() {
     // Take a photo
@@ -17,6 +20,9 @@ export class PhotoService {
       resultType: CameraResultType.Uri,
       source: CameraSource.Camera,
       quality: 100
+    }).catch((e) => {
+      this.navCtrl.navigateBack('');
+      return;
     });
 
     // this.photos.unshift({
@@ -24,10 +30,12 @@ export class PhotoService {
     //   webviewPath: capturedPhoto.webPath!,
     // });
 
-    this.lastPhoto = {
-      filepath: "soon...",
-      webviewPath: capturedPhoto.webPath!,
-    };
+    if (capturedPhoto) {
+      this.lastPhoto = {
+        filepath: "soon...",
+        webviewPath: capturedPhoto.webPath!,
+      };
+    }
   }
 }
 

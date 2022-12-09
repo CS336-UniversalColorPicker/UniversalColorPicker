@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { LoadingController, NavController } from '@ionic/angular';
+import { LoadingController, NavController, ToastController } from '@ionic/angular';
 import { Color } from '../interfaces/color';
 import { AuthService } from '../services/auth.service';
 import { ColorsService } from '../services/colors.service';
 import { PhotoService } from '../services/photo.service';
+import { Clipboard } from '@angular/cdk/clipboard';
 
 @Component({
   selector: 'app-home',
@@ -20,7 +21,9 @@ export class HomePage {
     private colorService: ColorsService,
     private authService: AuthService,
     private navCtrl: NavController,
-    private loadingController: LoadingController,) {
+    private loadingController: LoadingController,
+    private clipboard: Clipboard,
+    private toastController: ToastController) {
     colorService.getColors().subscribe(colors => {
       this.colors = colors;
     });
@@ -49,5 +52,16 @@ export class HomePage {
 
   removeColor(color: Color) {
     this.colorService.removeColor(color.id);
+  }
+
+  async copyVal(color: Color) {
+    this.clipboard.copy(color.value);
+    console.log('Hex copied');
+    const toast = await this.toastController.create({
+      message: 'Copied to clipboard',
+      duration: 1500,
+      position: 'bottom',
+    });
+    await toast.present();
   }
 }
