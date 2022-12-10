@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { LoadingController, NavController, ToastController } from '@ionic/angular';
 import { Color } from '../interfaces/color';
 import { AuthService } from '../services/auth.service';
