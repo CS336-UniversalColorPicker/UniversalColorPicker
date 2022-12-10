@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { FirebaseApp } from '@angular/fire/app';
-import { UserCredential } from '@angular/fire/auth';
+import { Component } from '@angular/core';
 import { AlertController, LoadingController, NavController, ToastController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -9,7 +7,7 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage implements OnInit {
+export class LoginPage {
 
   public emailAddress: string = '';
   public password: string = '';
@@ -27,9 +25,6 @@ export class LoginPage implements OnInit {
     private alertController: AlertController,
     private toastController: ToastController,
     private navController: NavController) { }
-
-  ngOnInit() {
-  }
 
   onEmailUpdate() {
     if (!!this.emailAddress) {
@@ -140,7 +135,7 @@ export class LoginPage implements OnInit {
       position: 'bottom',
     });
     await toast.present();
-
+    
     // go home
     this.navController.navigateBack('');
   }

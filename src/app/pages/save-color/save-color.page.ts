@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { Color } from 'src/app/interfaces/color';
+import { AuthService } from 'src/app/services/auth.service';
 import { ColorsService } from 'src/app/services/colors.service';
 
 @Component({
@@ -22,7 +23,8 @@ export class SaveColorPage implements OnInit {
   constructor(
     public colorService: ColorsService,
     private navCtrl: NavController,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private auth: AuthService) {
     const colorValue = this.route.snapshot.paramMap.get('color');
     if (colorValue !== null) {
       this.colorValue = colorValue;
@@ -42,7 +44,13 @@ export class SaveColorPage implements OnInit {
       return;
     }
 
-    this.colorService.addColor(this.colorValue, this.colorName, this.colorDescription);
+    const currentUser = this.auth.getUserId();
+    if (currentUser) {
+      this.colorService.addColor(currentUser, this.colorValue, this.colorName, this.colorDescription);
+    } else {
+      // TODO
+      console.log("no account when saving. bad bad bad bad aba");
+    }
     this.navCtrl.navigateBack('');
   }
 

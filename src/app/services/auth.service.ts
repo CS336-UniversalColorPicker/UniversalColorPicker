@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Auth, createUserWithEmailAndPassword, getAuth, sendPasswordResetEmail, signInWithEmailAndPassword, signOut, UserCredential } from '@angular/fire/auth';
+import { Auth, createUserWithEmailAndPassword, sendPasswordResetEmail, signInWithEmailAndPassword, signOut, UserCredential } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -8,23 +8,31 @@ export class AuthService {
 
   constructor(private auth: Auth) { }
 
-  signUserIn(email: string, password: string): Promise<UserCredential> {
-    return signInWithEmailAndPassword(this.auth, email, password);
+  async signUserIn(email: string, password: string): Promise<UserCredential> {
+    let credentials = await signInWithEmailAndPassword(this.auth, email, password);
+    return credentials;
   }
   
-  createAccount(email: string, password: string): Promise<any> {
+  async createAccount(email: string, password: string): Promise<any> {
     return createUserWithEmailAndPassword(this.auth, email, password);
   }
 
-  resetPassword(email: string): Promise<void> {
+  async resetPassword(email: string): Promise<void> {
     return sendPasswordResetEmail(this.auth, email);
   }
 
-  signUserOut(): Promise<void> {
+  async signUserOut(): Promise<void> {
     return signOut(this.auth);
   }
 
+  getUserId(): string | null {
+    if (this.auth.currentUser) {
+      return this.auth.currentUser.uid;
+    }
+    return null;
+  }
+
   getCurrentUser(): string | null {
-    return this.auth.currentUser?.email ?? null;
+    return this.auth.currentUser?.uid ?? null;
   }
 }
