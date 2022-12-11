@@ -1,6 +1,6 @@
 {
-  "name": "app",
-  "short_name": "app",
+  "name": "Universal Color Picker",
+  "short_name": "UniColorPicker",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",
