@@ -10,7 +10,7 @@ import { ColorsService } from 'src/app/services/colors.service';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage implements OnInit {
+export class LoginPage {
 
   public emailAddress: string = '';
   public password: string = '';
@@ -27,11 +27,7 @@ export class LoginPage implements OnInit {
     private loadingController: LoadingController,
     private alertController: AlertController,
     private toastController: ToastController,
-    private navController: NavController,
-    private colorService: ColorsService) { }
-
-  ngOnInit() {
-  }
+    private navController: NavController) { }
 
   onEmailUpdate() {
     if (!!this.emailAddress) {
