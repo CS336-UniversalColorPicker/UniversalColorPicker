@@ -1,9 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { FirebaseApp } from '@angular/fire/app';
-import { UserCredential } from '@angular/fire/auth';
+import { Component } from '@angular/core';
 import { AlertController, LoadingController, NavController, ToastController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
-import { ColorsService } from 'src/app/services/colors.service';
 
 @Component({
   selector: 'app-login',

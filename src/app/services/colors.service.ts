@@ -3,7 +3,6 @@ import { collection, collectionData, doc, Firestore, query, setDoc, Timestamp, w
 import { deleteDoc } from '@firebase/firestore';
 import { Observable } from 'rxjs';
 import { Color } from '../interfaces/color';
-import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
