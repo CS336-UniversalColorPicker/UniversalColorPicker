@@ -71,7 +71,6 @@ export class HomePage {
 
   async copyVal(color: Color) {
     this.clipboard.copy(color.value);
-    console.log('Hex copied');
     const toast = await this.toastController.create({
       message: 'Copied to clipboard',
       duration: 1500,

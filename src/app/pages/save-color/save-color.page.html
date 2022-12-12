@@ -16,7 +16,7 @@
     </ion-item>
   </ion-list>
 
-  <ion-item *ngIf="colorValue !== ''">
+  <ion-item *ngIf="colorValue !== ''" lines="none">
     <ion-list id="color-info" slot="start">
       <ion-avatar id="color-preview" [style.background-color]="colorValue"></ion-avatar>
 

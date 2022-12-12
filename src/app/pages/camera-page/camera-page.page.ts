@@ -21,7 +21,7 @@ export class CameraPagePage implements OnInit {
   public a: number = 0;
 
   public hex: string = '#000000';
-  public rgb: string = "(0, 0, 0)";
+  public rgb: string = '(0, 0, 0)';
 
   private redrawCanvas: boolean = false;
 
@@ -47,6 +47,7 @@ export class CameraPagePage implements OnInit {
     this.redrawCanvas = true;
   }
 
+  // get the color at location where user clicked
   // see https://stackoverflow.com/questions/8751020/how-to-check-if-a-specific-pixel-of-an-image-is-transparent
   getColor(event: MouseEvent) {
     if (!this.canvas || this.redrawCanvas) {
@@ -57,7 +58,6 @@ export class CameraPagePage implements OnInit {
       this.canvas!.height = this.img!.clientHeight
       this.canvas!.getContext('2d')?.drawImage(this.img!, 0, 0, this.img!.clientWidth, this.img!.clientHeight);
 
-      console.log("Canvas redrawn!");
       this.redrawCanvas = false;
     }
 
@@ -72,9 +72,9 @@ export class CameraPagePage implements OnInit {
     this.rgb = `(${this.r}, ${this.g}, ${this.b})`;
   }
 
+  // copy hex value, toast
   async copyHex() {
     this.clipboard.copy(this.hex);
-    console.log('Hex copied');
     const toast = await this.toastController.create({
       message: 'Hex Copied to clipboard',
       duration: 1500,
@@ -83,9 +83,9 @@ export class CameraPagePage implements OnInit {
     await toast.present();
   }
 
+  // copy RGB value, toast
   async copyRGB() {
     this.clipboard.copy(this.rgb);
-    console.log('RGB copied');
     const toast = await this.toastController.create({
       message: 'RGB copied to clipboard',
       duration: 1500,
@@ -94,6 +94,7 @@ export class CameraPagePage implements OnInit {
     await toast.present();
   }
 
+  // helper method to convert integer to hex, zero-padding if necessary
   toHex(val: number) {
     let hex = val.toString(16);
     return hex.length === 1 ? "0" + hex : hex;
