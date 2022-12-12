@@ -16,7 +16,7 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-list lines="full">
+  <ion-list lines="full" *ngIf="colors.length > 0">
     <ion-item-sliding class="color-item" *ngFor="let color of colors">
       <ion-item>
         <ion-label class="color-label">

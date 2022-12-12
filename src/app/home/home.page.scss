@@ -32,10 +32,6 @@ hr.solid {
 
 .color-item {
 
-  * {
-    // border: red 1px solid;
-  }
-
   .color-labels-wrapper {
     display: flex;
   }
@@ -47,6 +43,6 @@ hr.solid {
   .color-value-text {
     text-align: end;
     margin-right: 10px;
-    max-width: 64px;
+    max-width: 72px;
   }
 }

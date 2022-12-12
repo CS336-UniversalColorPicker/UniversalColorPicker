@@ -23,8 +23,7 @@ export class SaveColorPage implements OnInit {
   constructor(
     public colorService: ColorsService,
     private navCtrl: NavController,
-    private route: ActivatedRoute,
-    private auth: AuthService) {
+    private route: ActivatedRoute) {
     const colorValue = this.route.snapshot.paramMap.get('color');
     if (colorValue !== null) {
       this.colorValue = colorValue;
@@ -38,19 +37,13 @@ export class SaveColorPage implements OnInit {
     this.nameWasEmpty = false;
   }
 
-  save() {
+  async save() {
     this.nameWasEmpty = !this.colorName;
     if (this.nameWasEmpty) {
       return;
     }
-
-    const currentUser = this.auth.getUserId();
-    if (currentUser) {
-      this.colorService.addColor(currentUser, this.colorValue, this.colorName, this.colorDescription);
-    } else {
-      // TODO
-      console.log("no account when saving. bad bad bad bad aba");
-    }
+    
+    await this.colorService.addColor(this.colorValue, this.colorName, this.colorDescription);
     this.navCtrl.navigateBack('');
   }
 
