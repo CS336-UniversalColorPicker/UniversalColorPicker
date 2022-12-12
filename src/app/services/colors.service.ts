@@ -28,7 +28,7 @@ export class ColorsService {
   }
 
   async removeColor(colorId: string): Promise<void> {
-    await deleteDoc(doc(this.firestore, 'colors', 'ShcdcGeV1BakmFLSaeWtfKKOy583', colorId));
+    await deleteDoc(doc(this.firestore, 'colors', colorId));
   }
 
   async addColor(userId: string, value: string, name?: string, description?: string): Promise<string> {
