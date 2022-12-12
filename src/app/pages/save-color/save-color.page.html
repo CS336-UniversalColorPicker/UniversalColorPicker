@@ -1,9 +1,6 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Save Color</ion-title>
-    <!-- <ion-buttons slot="end">
-      <ion-button (click)="cancel()">Cancel</ion-button>
-    </ion-buttons> -->
   </ion-toolbar>
 </ion-header>
 
@@ -20,8 +17,6 @@
   </ion-list>
 
   <ion-item *ngIf="colorValue !== ''">
-    <!-- <ion-img id="image-thumbnail" src="{{imageSource}}" alt="The image from which the color was picked"></ion-img> -->
-
     <ion-list id="color-info" slot="start">
       <ion-avatar id="color-preview" [style.background-color]="colorValue"></ion-avatar>
 
@@ -37,14 +32,10 @@
         <ion-button fill="outline" (click)="cancel()">Cancel</ion-button>
       </ion-col>
       <ion-col size="6">
-        <ion-button fill="outline" (click)="save()">Save</ion-button>
+        <ion-button fill="outline" (click)="save()" (keyup.enter)="save()">Save</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
 
 
 </ion-content>
-
-<!-- <ion-footer>
-  <ion-button expand="block" (click)="save()">Save</ion-button>
-</ion-footer> -->

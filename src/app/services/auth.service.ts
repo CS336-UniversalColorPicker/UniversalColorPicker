@@ -9,30 +9,22 @@ export class AuthService {
   constructor(private auth: Auth) { }
 
   async signUserIn(email: string, password: string): Promise<UserCredential> {
-    let credentials = await signInWithEmailAndPassword(this.auth, email, password);
-    return credentials;
+    return await signInWithEmailAndPassword(this.auth, email, password);
   }
   
   async createAccount(email: string, password: string): Promise<any> {
-    return createUserWithEmailAndPassword(this.auth, email, password);
+    return await createUserWithEmailAndPassword(this.auth, email, password);
   }
 
   async resetPassword(email: string): Promise<void> {
-    return sendPasswordResetEmail(this.auth, email);
+    return await sendPasswordResetEmail(this.auth, email);
   }
 
   async signUserOut(): Promise<void> {
-    return signOut(this.auth);
+    return await signOut(this.auth);
   }
 
-  getUserId(): string | null {
-    if (this.auth.currentUser) {
-      return this.auth.currentUser.uid;
-    }
-    return null;
-  }
-
-  getCurrentUser(): string | null {
-    return this.auth.currentUser?.uid ?? null;
+  getSignedInUid(): string | undefined {
+    return this.auth.currentUser?.uid;
   }
 }

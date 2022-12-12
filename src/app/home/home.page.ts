@@ -22,7 +22,6 @@ export class HomePage {
   private colorsSubscription: Subscription | undefined;
 
   constructor(
-    private photoService: PhotoService,
     private colorService: ColorsService,
     private authService: AuthService,
     private navCtrl: NavController,
@@ -30,33 +29,25 @@ export class HomePage {
     private clipboard: Clipboard,
     private toastController: ToastController,
     private auth: Auth) {
-    onAuthStateChanged(auth, (user: User | null) => {
-      this.userIsSignedIn = !user;
+
+    onAuthStateChanged(auth, async (user: User | null) => {
       if (user) {
         this.signInButtonText = 'Sign Out';
-        this.userIsSignedIn = true;
       } else {
         this.signInButtonText = 'Sign In';
-        this.userIsSignedIn = false;
       }
-      this.refreshColors(user?.uid ?? null);
-    });
-  }
 
-  async refreshColors(currentUser: string | null) {
-    await this.colorService.load(currentUser);
-    this.colorsSubscription = this.colorService.getColors().subscribe(colors => {
-      if (this.userIsSignedIn) {
+      // unsubscribe from current subscription so we don't get old data after the new data (this bug made me sad for many hours)
+      this.colorsSubscription?.unsubscribe();
+      await this.colorService.load(user?.uid);
+      this.colorsSubscription = this.colorService.getColors().subscribe(colors => {
         this.colors = colors;
-      } else {
-        this.colors = [];
-      }
+      });
     });
   }
 
   async signInButtonClicked() {
-    const currentUser = this.authService.getCurrentUser();
-    console.log(currentUser ?? null);
+    const currentUser = this.authService.getSignedInUid();
     let userWasSignedIn: boolean = !!currentUser;
     if (userWasSignedIn) {
       // sign out
@@ -68,12 +59,6 @@ export class HomePage {
       // sign in
       await this.navCtrl.navigateForward('/login');
     }
-  }
-
-  getSignInButtonText(): string {
-    const currentUser = this.authService.getCurrentUser();
-    let userIsSignedIn: boolean = !!currentUser;
-    return userIsSignedIn ? 'Sign Out' : 'Sign In';
   }
 
   takePhoto() {
