@@ -97,7 +97,7 @@ export class CameraPagePage implements OnInit {
   // helper method to convert integer to hex, zero-padding if necessary
   toHex(val: number) {
     let hex = val.toString(16);
-    return hex.length === 1 ? "0" + hex : hex;
+    return hex.length === 1 ? '0' + hex : hex;
   }
 
   // navigate to save-color page, pass current color

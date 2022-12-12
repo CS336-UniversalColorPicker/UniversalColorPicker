@@ -21,7 +21,7 @@ export class ColorsService {
     if (userId) {
       // if there's a user ID, that means we can try to pull from Firestore
       const colorCollection = collection(this.firestore, 'colors');
-      const queriedData = query(colorCollection, where("userId", "==", userId));
+      const queriedData = query(colorCollection, where('userId', '==', userId));
       this.colors$ = collectionData(queriedData) as BehaviorSubject<Color[]>;
     } else {
       // there's no user ID; pull from local storage

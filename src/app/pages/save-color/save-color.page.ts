@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
-import { Color } from 'src/app/interfaces/color';
-import { AuthService } from 'src/app/services/auth.service';
 import { ColorsService } from 'src/app/services/colors.service';
 
 @Component({
@@ -10,15 +8,13 @@ import { ColorsService } from 'src/app/services/colors.service';
   templateUrl: './save-color.page.html',
   styleUrls: ['./save-color.page.scss'],
 })
-export class SaveColorPage implements OnInit {
+export class SaveColorPage {
 
   public nameWasEmpty: boolean = false;
 
   public colorValue: string = '';
   public colorName: string = '';
   public colorDescription: string = '';
-
-  public imageSource: string = "https://docs-demo.ionic.io/assets/madison.jpg";
 
   constructor(
     public colorService: ColorsService,
@@ -28,9 +24,6 @@ export class SaveColorPage implements OnInit {
     if (colorValue !== null) {
       this.colorValue = colorValue;
     }
-  }
-
-  ngOnInit() {
   }
 
   onNameChange() {

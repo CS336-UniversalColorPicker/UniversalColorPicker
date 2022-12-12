@@ -16,7 +16,7 @@ import { Subscription } from 'rxjs';
 export class HomePage {
 
   public colors: Color[] = [];
-  public signInButtonText: string = "Sign In";
+  public signInButtonText: string = 'Sign In';
 
   private userIsSignedIn: boolean = false;
   private colorsSubscription: Subscription | undefined;
